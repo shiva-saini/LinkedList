@@ -1,0 +1,72 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class Node{
+  int val;
+  Node next;
+  Node(int d){
+    val = d;
+    next = null;
+  }
+};
+public class Main
+{
+
+  public static Node insertAtLast(Node head,int data){
+    Node node = new Node(data);
+    if(head == null){
+      head = node;
+    }else{
+      Node temp = head;
+      while(temp.next != null){
+        temp = temp.next;
+      }
+      temp.next = node;
+    }
+    return head;
+  }
+
+  public static Node deleteNode(Node head){
+    if(head.next == null) return null;
+    if(head == null) return null;
+    Node prev = null;
+    Node slow = head;
+    Node fast = head;
+    while(fast != null && fast.next != null){
+      prev = slow;
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+    prev.next = slow.next;
+    return head;
+  }
+
+  public static void PrintList(Node head){
+    Node temp = head;
+    while(temp != null){
+      System.out.print(temp.val+" ");
+      temp = temp.next;
+    }
+    System.out.println();
+  }
+  
+	public static void main (String[] args) throws java.lang.Exception
+	{
+	               Scanner sc = new Scanner(System.in);
+                     int n = sc.nextInt();
+                    int arr[] = new int[n];
+                    for(int i=0;i<n;i++){
+                      arr[i] = sc.nextInt();
+                    }
+
+              Node head = null;
+              for(int i=0;i<n;i++){
+                head = insertAtLast(head,arr[i]);
+              }
+
+            head = deleteNode(head);
+           PrintList(head);
+
+      
+	}
+}
